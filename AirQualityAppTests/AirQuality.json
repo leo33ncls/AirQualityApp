@@ -1,0 +1,108 @@
+{
+    "meta": {
+        "name": "openaq-api",
+        "license": "CC BY 4.0",
+        "website": "https://docs.openaq.org/",
+        "page": 1,
+        "limit": 100,
+        "found": 4753238
+    },
+    "results": [
+        {
+            "location": "FR01011",
+            "parameter": "pm25",
+            "date": {
+                "utc": "2020-12-08T12:00:00Z",
+                "local": "2020-12-08T13:00:00+01:00"
+            },
+            "value": 15.9,
+            "unit": "µg/m³",
+            "coordinates": {
+                "latitude": 49.1194269655692,
+                "longitude": 6.18083136292584
+            },
+            "country": "FR",
+            "city": "Moselle"
+        },
+        {
+            "location": "FR23177",
+            "parameter": "pm25",
+            "date": {
+                "utc": "2020-12-08T12:00:00Z",
+                "local": "2020-12-08T13:00:00+01:00"
+            },
+            "value": 10,
+            "unit": "µg/m³",
+            "coordinates": {
+                "latitude": 47.787711631788,
+                "longitude": -0.444044431462552
+            },
+            "country": "FR",
+            "city": "Mayenne"
+        },
+        {
+            "location": "FR24018",
+            "parameter": "pm25",
+            "date": {
+                "utc": "2020-12-08T12:00:00Z",
+                "local": "2020-12-08T13:00:00+01:00"
+            },
+            "value": 5.7,
+            "unit": "µg/m³",
+            "coordinates": {
+                "latitude": 43.8353015894571,
+                "longitude": 5.78583314934565
+            },
+            "country": "FR",
+            "city": "Alpes-de-Haute-Provence"
+        },
+        {
+            "location": "FR31007",
+            "parameter": "pm25",
+            "date": {
+                "utc": "2020-12-08T12:00:00Z",
+                "local": "2020-12-08T13:00:00+01:00"
+            },
+            "value": 6.7,
+            "unit": "µg/m³",
+            "coordinates": {
+                "latitude": 44.9003038561871,
+                "longitude": -0.514722081386508
+            },
+            "country": "FR",
+            "city": "Gironde"
+        },
+        {
+            "location": "FR29424",
+            "parameter": "pm25",
+            "date": {
+                "utc": "2020-12-08T12:00:00Z",
+                "local": "2020-12-08T13:00:00+01:00"
+            },
+            "value": 1.6,
+            "unit": "µg/m³",
+            "coordinates": {
+                "latitude": 45.4200881308329,
+                "longitude": 4.39542075258545
+            },
+            "country": "FR",
+            "city": "Loire"
+        },
+        {
+            "location": "FR14012",
+            "parameter": "pm25",
+            "date": {
+                "utc": "2020-12-08T12:00:00Z",
+                "local": "2020-12-08T13:00:00+01:00"
+            },
+            "value": 18,
+            "unit": "µg/m³",
+            "coordinates": {
+                "latitude": 49.224144731874,
+                "longitude": 4.02055378452238
+            },
+            "country": "FR",
+            "city": "Marne"
+        }
+    ]
+}
