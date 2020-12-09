@@ -52,7 +52,6 @@ class AirQualityService {
         - parameter: The air parameter for which we want to receive the values from the API.
         - callback: The callback returning the air quality list.
      */
-
     func getAirQualityValue(for country: String, parameter: String, callback: @escaping (Bool, AirQualityList?) -> Void) {
         guard let url = airQualityURL(country: country, parameter: parameter) else {
             callback(false, nil)

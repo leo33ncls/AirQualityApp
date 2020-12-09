@@ -10,7 +10,7 @@ import Foundation
 // MARK: - AirQualityList
 struct AirQualityList: Decodable {
     let meta: Meta
-    let results: [Result]
+    let results: [LocationResult]
 }
 
 // MARK: - Meta
@@ -21,7 +21,7 @@ struct Meta: Decodable {
 }
 
 // MARK: - Result
-struct Result: Decodable {
+struct LocationResult: Decodable {
     let location: String
     let parameter: String
     let value: Double
