@@ -104,6 +104,10 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klc-XZ-QOA">
                                         <rect key="frame" x="376" y="0.0" width="30" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="qG2-Mu-nos"/>
+                                            <constraint firstAttribute="width" secondItem="klc-XZ-QOA" secondAttribute="height" multiplier="6:7" id="uPX-3p-LQK"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" systemColor="labelColor"/>
@@ -112,6 +116,12 @@
                                             <action selector="hideParametersView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sB4-Fh-QRr"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V75-Bz-kz7">
+                                        <rect key="frame" x="8" y="11" width="360" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -120,15 +130,18 @@
                                     <constraint firstItem="GHU-bQ-Gs6" firstAttribute="top" secondItem="Bub-c7-R6A" secondAttribute="bottom" constant="8" id="Cf6-B4-YXf"/>
                                     <constraint firstItem="rix-oc-aHw" firstAttribute="leading" secondItem="xee-XJ-Ouc" secondAttribute="leading" constant="8" id="FAv-ou-zYA"/>
                                     <constraint firstItem="rix-oc-aHw" firstAttribute="top" secondItem="GHU-bQ-Gs6" secondAttribute="bottom" constant="25" id="G1h-aH-Gfz"/>
+                                    <constraint firstItem="xfV-dH-e6s" firstAttribute="top" secondItem="V75-Bz-kz7" secondAttribute="bottom" constant="8" id="JoB-U5-wtt"/>
+                                    <constraint firstItem="V75-Bz-kz7" firstAttribute="top" secondItem="xee-XJ-Ouc" secondAttribute="top" constant="11" id="LLA-Sm-2l9"/>
                                     <constraint firstItem="avf-aZ-gGz" firstAttribute="top" secondItem="oY9-qk-CHP" secondAttribute="bottom" constant="16" id="M4y-n8-lgZ"/>
                                     <constraint firstItem="oY9-qk-CHP" firstAttribute="leading" secondItem="xee-XJ-Ouc" secondAttribute="leading" id="MZM-fF-eCD"/>
-                                    <constraint firstItem="xfV-dH-e6s" firstAttribute="top" secondItem="xee-XJ-Ouc" secondAttribute="top" constant="40" id="OkF-un-SZG"/>
                                     <constraint firstItem="xfV-dH-e6s" firstAttribute="leading" secondItem="xee-XJ-Ouc" secondAttribute="leading" constant="8" id="Orh-VP-FLR"/>
                                     <constraint firstAttribute="bottom" secondItem="avf-aZ-gGz" secondAttribute="bottom" constant="8" id="WJe-wa-tdQ"/>
                                     <constraint firstItem="oY9-qk-CHP" firstAttribute="top" secondItem="rix-oc-aHw" secondAttribute="bottom" constant="8" id="Wb7-Qf-8VA"/>
                                     <constraint firstItem="GHU-bQ-Gs6" firstAttribute="leading" secondItem="xee-XJ-Ouc" secondAttribute="leading" constant="8" id="XTj-1l-q1z"/>
                                     <constraint firstItem="Bub-c7-R6A" firstAttribute="leading" secondItem="xee-XJ-Ouc" secondAttribute="leading" constant="8" id="YDt-X8-oqQ"/>
+                                    <constraint firstItem="klc-XZ-QOA" firstAttribute="leading" secondItem="V75-Bz-kz7" secondAttribute="trailing" constant="8" id="ZAd-GU-GKy"/>
                                     <constraint firstAttribute="trailing" secondItem="klc-XZ-QOA" secondAttribute="trailing" constant="8" id="awK-Vb-r4u"/>
+                                    <constraint firstItem="V75-Bz-kz7" firstAttribute="leading" secondItem="xee-XJ-Ouc" secondAttribute="leading" constant="8" id="cBP-nl-RoS"/>
                                     <constraint firstAttribute="trailing" secondItem="oY9-qk-CHP" secondAttribute="trailing" id="gKv-ol-wx2"/>
                                     <constraint firstAttribute="trailing" secondItem="GHU-bQ-Gs6" secondAttribute="trailing" constant="8" id="hwP-rC-cvl"/>
                                     <constraint firstItem="Bub-c7-R6A" firstAttribute="top" secondItem="xfV-dH-e6s" secondAttribute="bottom" constant="25" id="jP3-zM-f9i"/>
@@ -137,14 +150,19 @@
                                     <constraint firstItem="avf-aZ-gGz" firstAttribute="centerX" secondItem="xee-XJ-Ouc" secondAttribute="centerX" id="xYR-gK-UYl"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="u4O-kQ-WP8">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="u4O-kQ-WP8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0jo-Fu-37w"/>
                             <constraint firstItem="xee-XJ-Ouc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3Li-zc-E5a"/>
                             <constraint firstItem="vxI-80-rxN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="72S-jJ-5Qi"/>
                             <constraint firstItem="VR3-Cd-dQ0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Bxh-gk-xzl"/>
                             <constraint firstItem="xee-XJ-Ouc" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="C1U-Jn-QOJ"/>
+                            <constraint firstItem="u4O-kQ-WP8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GxA-gT-cCK"/>
                             <constraint firstItem="VR3-Cd-dQ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="H6B-Y3-0XV"/>
                             <constraint firstItem="xee-XJ-Ouc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="J1N-RG-da4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rMI-0P-xiO" secondAttribute="trailing" constant="20" id="LYn-lL-jGM"/>
@@ -155,6 +173,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="u4O-kQ-WP8" id="ICS-pg-ivD"/>
                         <outlet property="countryPickerView" destination="oY9-qk-CHP" id="kxc-y0-5Bz"/>
                         <outlet property="mapModeSegmentedControl" destination="xfV-dH-e6s" id="WMn-v7-dIl"/>
                         <outlet property="mapView" destination="vxI-80-rxN" id="0my-sm-SOn"/>

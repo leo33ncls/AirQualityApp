@@ -20,7 +20,9 @@
 		2812D49E2581121E00581CC8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D49D2581121E00581CC8 /* MapViewController.swift */; };
 		2812D4A22581140F00581CC8 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D4A12581140F00581CC8 /* CustomAnnotation.swift */; };
 		2812D4A62581147800581CC8 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D4A52581147800581CC8 /* CustomAnnotationView.swift */; };
-		2812D4C625814B0700581CC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D4C525814B0700581CC8 /* SceneDelegate.swift */; };
+		2812D4CA25826E9100581CC8 /* ParametersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D4C925826E9100581CC8 /* ParametersService.swift */; };
+		2812D4EF258275D600581CC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D4EE258275D600581CC8 /* SceneDelegate.swift */; };
+		2812D4F325829D0000581CC8 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812D4F225829D0000581CC8 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +53,9 @@
 		2812D49D2581121E00581CC8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2812D4A12581140F00581CC8 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		2812D4A52581147800581CC8 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
-		2812D4C525814B0700581CC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/SceneDelegate.swift"; sourceTree = "<group>"; };
+		2812D4C925826E9100581CC8 /* ParametersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersService.swift; sourceTree = "<group>"; };
+		2812D4EE258275D600581CC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2812D4F225829D0000581CC8 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				2812D4532580151A00581CC8 /* AppDelegate.swift */,
-				2812D4C525814B0700581CC8 /* SceneDelegate.swift */,
+				2812D4EE258275D600581CC8 /* SceneDelegate.swift */,
 				2812D45C2580151D00581CC8 /* Assets.xcassets */,
 				2812D4612580151D00581CC8 /* Info.plist */,
+				2812D4F225829D0000581CC8 /* UIColor.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				2812D46D258015F200581CC8 /* AirQualityList.swift */,
 				2812D4702580166D00581CC8 /* AirQualityService.swift */,
 				2812D4A12581140F00581CC8 /* CustomAnnotation.swift */,
+				2812D4C925826E9100581CC8 /* ParametersService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,12 +261,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2812D4712580166D00581CC8 /* AirQualityService.swift in Sources */,
-				2812D4C625814B0700581CC8 /* SceneDelegate.swift in Sources */,
 				2812D4542580151A00581CC8 /* AppDelegate.swift in Sources */,
 				2812D46E258015F200581CC8 /* AirQualityList.swift in Sources */,
 				2812D49E2581121E00581CC8 /* MapViewController.swift in Sources */,
+				2812D4F325829D0000581CC8 /* UIColor.swift in Sources */,
+				2812D4CA25826E9100581CC8 /* ParametersService.swift in Sources */,
 				2812D4A62581147800581CC8 /* CustomAnnotationView.swift in Sources */,
 				2812D4A22581140F00581CC8 /* CustomAnnotation.swift in Sources */,
+				2812D4EF258275D600581CC8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +434,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7DNK7L46CJ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AirQualityApp/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -435,7 +443,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.nicolasleo.AirQualityApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -445,7 +453,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7DNK7L46CJ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AirQualityApp/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,7 +462,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.nicolasleo.AirQualityApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

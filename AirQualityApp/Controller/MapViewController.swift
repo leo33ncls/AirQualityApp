@@ -19,6 +19,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapModeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var parametersSegmentedControl: UISegmentedControl!
     @IBOutlet weak var countryPickerView: UIPickerView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // ====================
     // MARK: - View Cycles
@@ -26,58 +27,50 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         countryPickerView.dataSource = self
         countryPickerView.delegate = self
+
         parametersView.isHidden = true
+        activityIndicator.isHidden = false
+        
+        UserDefaults.standard.register(defaults: [ParametersService.Keys.countryIndex: 78])
+
         mapView.register(CustomAnnotationView.self,
                          forAnnotationViewWithReuseIdentifier:
                          MKMapViewDefaultAnnotationViewReuseIdentifier)
 
         setUpParameters()
-        checkParametersAndGetValues()
+        getAirQualityValues(country: ParametersService.country,
+                            parameter: ParametersService.airParameter)
     }
-    
+
     // =====================
     // MARK: - View Functions
 
     // Function that sets up the good parameters saved in the UserDefaults.
     private func setUpParameters() {
-        if let parameterIndex = UserDefaults.standard.object(forKey: "airParameterIndex") as? Int {
-            parametersSegmentedControl.selectedSegmentIndex = parameterIndex
-        } else {
-            parametersSegmentedControl.selectedSegmentIndex = 0
-        }
-        
-        if let countryIndex = UserDefaults.standard.object(forKey: "countryIndex") as? Int {
-            countryPickerView.selectRow(countryIndex, inComponent: 0, animated: true)
-        } else {
-            countryPickerView.selectRow(78, inComponent: 0, animated: true)
-        }
+        parametersSegmentedControl.selectedSegmentIndex = ParametersService.airParameterIndex
+        countryPickerView.selectRow(ParametersService.countryIndex,
+                                    inComponent: 0, animated: true)
     }
-    
-    // Function that checkes if the parameters for the API are correct.
-    private func checkParametersAndGetValues() {
-        if let parameter = UserDefaults.standard.object(forKey: "airParameter") as? String,
-           let country = UserDefaults.standard.object(forKey: "country") as? String {
-            getAirQualityValues(country: country, parameter: parameter)
-        } else if let parameter = UserDefaults.standard.object(forKey: "airParameter") as? String {
-            getAirQualityValues(country: "FR", parameter: parameter)
-        } else if let country = UserDefaults.standard.object(forKey: "country") as? String {
-            getAirQualityValues(country: country, parameter: "pm25")
-        } else {
-            getAirQualityValues(country: "FR", parameter: "pm25")
-        }
-    }
-    
+
     // Function that gets the air quality values from the API.
     private func getAirQualityValues(country: String, parameter: String) {
+        refreshButton.isEnabled = false
+        parametersButton.isEnabled = false
         AirQualityService(session: URLSession(configuration: .default))
             .getAirQualityValue(for: country, parameter: parameter) { (success, airQuality) in
-                guard success, let airQuality = airQuality else {
+                self.activityIndicator.isHidden = true
+                self.refreshButton.isEnabled = true
+                self.parametersButton.isEnabled = true
+                
+                guard success, let airQuality = airQuality,
+                      !airQuality.results.isEmpty else {
+                    self.noValuesAlert()
                     return
                 }
                 self.setMarkers(airQualityList: airQuality)
             }
     }
-    
+
     // Function that adds annotations with air quality values to the map.
     private func setMarkers(airQualityList: AirQualityList) {
         var annotations = [CustomAnnotation]()
@@ -89,17 +82,62 @@ class MapViewController: UIViewController {
         mapView.showAnnotations(annotations, animated: true)
     }
 
+    // Function that saves the parameters choiced by the user.
+    private func saveParameters() {
+        let isoCountryCodeIndex = countryPickerView.selectedRow(inComponent: 0)
+        let isoCountryCode = NSLocale.isoCountryCodes[isoCountryCodeIndex]
+        ParametersService.countryIndex = isoCountryCodeIndex
+        ParametersService.country = isoCountryCode
+
+        switch parametersSegmentedControl.selectedSegmentIndex {
+        case 0:
+            ParametersService.airParameter = "pm25"
+            ParametersService.airParameterIndex = 0
+        case 1:
+            ParametersService.airParameter = "pm10"
+            ParametersService.airParameterIndex = 1
+        case 2:
+            ParametersService.airParameter = "so2"
+            ParametersService.airParameterIndex = 2
+        case 3:
+            ParametersService.airParameter = "no2"
+            ParametersService.airParameterIndex = 3
+        case 4:
+            ParametersService.airParameter = "o3"
+            ParametersService.airParameterIndex = 4
+        case 5:
+            ParametersService.airParameter = "co"
+            ParametersService.airParameterIndex = 5
+        default:
+            break
+        }
+    }
+
+    // =====================
+    // MARK: - Alert
+    private func noValuesAlert() {
+        let alert = UIAlertController(title: "Sorry!",
+                                        message: "No values for this country!",
+                                        preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+
     // =====================
     // MARK: - Map View Actions
 
     // Action that refreshes the air quality values for a country.
     @IBAction func refreshValues(_ sender: UIButton) {
-        checkParametersAndGetValues()
+        activityIndicator.isHidden = false
+        getAirQualityValues(country: ParametersService.country,
+                            parameter: ParametersService.airParameter)
     }
 
     // Action that shows the parametersView.
     @IBAction func showParametersView(_ sender: UIButton) {
         setUpParameters()
+        refreshButton.isEnabled = false
         UIView.animate(withDuration: 0.3, animations: {
             self.parametersView.isHidden = false
             self.parametersView.transform = .identity
@@ -111,6 +149,7 @@ class MapViewController: UIViewController {
 
     // Action that hides the parametersView.
     @IBAction func hideParametersView(_ sender: UIButton) {
+        refreshButton.isEnabled = true
         parametersView.isHidden = true
     }
 
@@ -126,30 +165,17 @@ class MapViewController: UIViewController {
 
     // Action that saves the parameters choiced by the user and make a new call for the API.
     @IBAction func validateParameters(_ sender: UIButton) {
-        let isoCountryCodeIndex = countryPickerView.selectedRow(inComponent: 0)
-        let isoCountryCode = NSLocale.isoCountryCodes[isoCountryCodeIndex]
-        UserDefaults.standard.set(isoCountryCode, forKey: "country")
-        UserDefaults.standard.setValue(isoCountryCodeIndex, forKey: "countryIndex")
-
-        switch parametersSegmentedControl.selectedSegmentIndex {
-        case 0: UserDefaults.standard.set("pm25", forKey: "airParameter")
-            UserDefaults.standard.set(0, forKey: "airParameterIndex")
-        case 1: UserDefaults.standard.set("pm10", forKey: "airParameter")
-            UserDefaults.standard.set(1, forKey: "airParameterIndex")
-        case 2: UserDefaults.standard.set("so2", forKey: "airParameter")
-            UserDefaults.standard.set(2, forKey: "airParameterIndex")
-        case 3: UserDefaults.standard.set("no2", forKey: "airParameter")
-            UserDefaults.standard.set(3, forKey: "airParameterIndex")
-        case 4: UserDefaults.standard.set("o3", forKey: "airParameter")
-            UserDefaults.standard.set(4, forKey: "airParameterIndex")
-        case 5: UserDefaults.standard.set("co", forKey: "airParameter")
-            UserDefaults.standard.set(5, forKey: "airParameterIndex")
-        default:
-            break
+        if parametersSegmentedControl.selectedSegmentIndex == ParametersService.airParameterIndex
+            && countryPickerView.selectedRow(inComponent: 0) == ParametersService.countryIndex {
+            parametersView.isHidden = true
+        } else {
+            activityIndicator.isHidden = false
+            saveParameters()
+            mapView.removeAnnotations(mapView.annotations)
+            getAirQualityValues(country: ParametersService.country,
+                                parameter: ParametersService.airParameter)
+            parametersView.isHidden = true
         }
-        mapView.removeAnnotations(mapView.annotations)
-        checkParametersAndGetValues()
-        parametersView.isHidden = true
     }
 }
 
@@ -158,12 +184,16 @@ extension MapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return NSLocale.isoCountryCodes.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return NSLocale.isoCountryCodes[row]
+        let isoCountryCode = NSLocale.isoCountryCodes[row]
+        guard let countryName = Locale.current.localizedString(forRegionCode: isoCountryCode) else {
+            return isoCountryCode
+        }
+        return isoCountryCode + ", " + countryName
     }
 }

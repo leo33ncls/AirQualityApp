@@ -66,7 +66,8 @@ class AirQualityService {
                     return
                 }
 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                guard let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200 else {
+                    print(response as Any)
                     callback(false, nil)
                     return
                 }
